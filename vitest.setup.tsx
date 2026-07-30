@@ -1,6 +1,14 @@
 import "@testing-library/jest-dom/vitest";
 import { createElement, Fragment } from "react";
 
+// jsdom doesn't implement ResizeObserver
+class ResizeObserverStub {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+window.ResizeObserver = ResizeObserverStub;
+
 /**
  * Global framer-motion mock.
  * All motion.* components render as plain HTML elements via a Proxy.
@@ -39,7 +47,11 @@ vi.mock("framer-motion", async () => {
   return {
     ...actual,
     motion,
-    useScroll: () => ({ scrollY: { onChange() {}, get() { return 0; } } }),
+    useScroll: () => ({
+      scrollY: { onChange() {}, get() { return 0; } },
+      scrollYProgress: 0,
+    }),
+    useTransform: () => 1,
     useMotionValueEvent() {},
     useInView: () => true,
     AnimatePresence({ children }: any) {
@@ -52,6 +64,12 @@ vi.mock("lenis/react", () => ({
   ReactLenis({ children }: { children: React.ReactNode }) {
     return createElement(Fragment, null, children);
   },
+}));
+
+// Mock next/navigation to prevent "invariant expected app router to be mounted"
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn() }),
+  usePathname: () => "/",
 }));
 
 // Mock next/font/google to prevent suspense in test

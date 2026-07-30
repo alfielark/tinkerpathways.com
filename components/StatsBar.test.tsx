@@ -7,7 +7,7 @@ describe("StatsBar", () => {
     render(<StatsBar />);
     expect(screen.getByText("Students reached")).toBeDefined();
     expect(screen.getByText("Partner schools")).toBeDefined();
-    expect(screen.getByText("Partner organisations")).toBeDefined();
+    expect(screen.getByText("Active learners")).toBeDefined();
     expect(screen.getByText("Average rating")).toBeDefined();
   });
 });

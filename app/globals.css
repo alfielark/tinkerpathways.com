@@ -41,6 +41,16 @@
     overscroll-behavior: contain;
   }
 
+  /* Hide the native scrollbar so it never shifts content.
+     Scrolling still works via Lenis, wheel, and keyboard. */
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
     overflow-x: hidden;
     cursor: none;

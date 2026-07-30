@@ -35,18 +35,18 @@ describe("Home page", () => {
     // Each nav item appears twice: desktop nav + mobile menu
     expect(screen.getAllByText("Our Mission").length).toBe(2);
     expect(screen.getAllByText("How It Works").length).toBe(2);
-    expect(screen.getAllByText("Programs").length).toBe(2);
+    expect(screen.getAllByText("About Us").length).toBe(2);
     expect(screen.getAllByText("Get Involved").length).toBe(2);
   });
 
-  it("renders all program cards", async () => {
+  it("renders all about section cards", async () => {
     await act(async () => {
       render(<Page />);
     });
     await new Promise((r) => setTimeout(r, 50));
-    expect(screen.getByText("Pathfinder")).toBeDefined();
-    expect(screen.getByText("Builder")).toBeDefined();
-    expect(screen.getByText("Agent")).toBeDefined();
+    expect(screen.getByText("Projects")).toBeDefined();
+    expect(screen.getByText("Governance")).toBeDefined();
+    expect(screen.getByText("Our Story")).toBeDefined();
   });
 
   it("renders CTA section buttons", async () => {
@@ -65,7 +65,7 @@ describe("Home page", () => {
     await new Promise((r) => setTimeout(r, 50));
     expect(screen.getByText("Students reached")).toBeDefined();
     expect(screen.getByText("Partner schools")).toBeDefined();
-    expect(screen.getByText("Partner organisations")).toBeDefined();
+    expect(screen.getByText("Active learners")).toBeDefined();
     expect(screen.getByText("Average rating")).toBeDefined();
   });
 
@@ -74,7 +74,7 @@ describe("Home page", () => {
       render(<Page />);
     });
     await new Promise((r) => setTimeout(r, 50));
-    expect(screen.getByText("Registered Charity No. 1234567")).toBeDefined();
+    expect(screen.getByText("Registered Charity No. 1218899")).toBeDefined();
   });
 
   it("renders the footer", async () => {
