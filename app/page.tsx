@@ -3,7 +3,7 @@ import { Hero } from "@/components/Hero";
 import { StatsBar } from "@/components/StatsBar";
 import { MissionSection } from "@/components/MissionSection";
 import { HowItWorks } from "@/components/HowItWorks";
-import { ProgramsSection } from "@/components/ProgramsSection";
+import { AboutSection } from "@/components/AboutSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 
@@ -16,7 +16,7 @@ export default function Home() {
         <StatsBar />
         <MissionSection />
         <HowItWorks />
-        <ProgramsSection />
+        <AboutSection />
         <CTASection />
       </main>
       <Footer />

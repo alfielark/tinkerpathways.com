@@ -11,7 +11,7 @@ export const SITE = {
 export const NAV_ITEMS = [
   { label: "Our Mission", href: "#mission" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Programs", href: "#programs" },
+  { label: "About Us", href: "#about" },
   { label: "Get Involved", href: "#get-involved" },
 ] as const;
 
@@ -51,24 +51,27 @@ export const STEPS = [
   },
 ] as const;
 
-export const PROGRAMS = [
+export const ABOUT_CARDS = [
   {
-    name: "Pathfinder",
-    audience: "Ages 11–14",
+    title: "Projects",
     description:
-      "A gentle introduction to how software agents think, communicate, and collaborate. Students build their first agent in a visual, block-based environment.",
+      "Explore the open-source tools, curricula, and experiments we're building to make agentic engineering education accessible to every young person.",
+    action: "View projects",
+    href: "/projects",
   },
   {
-    name: "Builder",
-    audience: "Ages 14–16",
+    title: "Governance",
     description:
-      "Students level up to text-based development, learning to orchestrate multi-agent systems, design prompts, and reason about reliability and safety.",
+      "Built for students, by students — our team of young leaders runs the charity day-to-day, from product to finance to governance. Meet the team.",
+    action: "Meet the team",
+    href: "/governance",
   },
   {
-    name: "Agent",
-    audience: "Ages 16–18",
+    title: "Our Story",
     description:
-      "An advanced track where students build production-style agentic applications, contribute to open-source tooling, and prepare for further study or apprenticeships.",
+      "Founded in 2026 by three teenagers with no experience and a plan. Tinker Pathways was born from a simple belief: the next generation should build the future, not just consume it.",
+    action: "Read our story",
+    href: "/our-story",
   },
 ] as const;
 

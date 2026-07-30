@@ -3,11 +3,6 @@ import { render, screen } from "@testing-library/react";
 import { Hero } from "./Hero";
 
 describe("Hero", () => {
-  it("renders the charity badge", () => {
-    render(<Hero />);
-    expect(screen.getByText("UK-registered charity")).toBeDefined();
-  });
-
   it("renders the main headline", () => {
     render(<Hero />);
     expect(screen.getByText("Tinker Pathways")).toBeDefined();

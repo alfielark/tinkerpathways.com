@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { CTA } from "@/lib/content";
 
@@ -39,12 +40,12 @@ export function CTASection() {
           transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
           className="mt-10 flex flex-wrap justify-center gap-4"
         >
-          <a
-            href="#"
+          <Link
+            href="/donate"
             className="inline-flex items-center gap-2 rounded-xl bg-blue px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-blue-dark hover:shadow-lg hover:shadow-blue/25"
           >
             {CTA.donateLabel}
-          </a>
+          </Link>
           <a
             href="#"
             className="inline-flex items-center gap-2 rounded-xl border border-ink/20 px-7 py-3.5 text-sm font-semibold text-ink transition-all hover:border-ink/40 hover:bg-black/5"

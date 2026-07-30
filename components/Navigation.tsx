@@ -2,9 +2,11 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { NAV_ITEMS, SITE } from "@/lib/content";
 
 export function Navigation() {
+  const router = useRouter();
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
@@ -48,7 +50,7 @@ export function Navigation() {
             </button>
           ))}
           <button
-            onClick={() => scrollTo("#get-involved")}
+            onClick={() => router.push("/donate")}
             className="rounded-lg bg-blue px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-dark"
           >
             Donate
@@ -65,6 +67,7 @@ export function Navigation() {
 
 function MobileMenu() {
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const toggle = () => {
     const menu = ref.current;
@@ -105,7 +108,7 @@ function MobileMenu() {
           </button>
         ))}
         <button
-          onClick={() => scrollTo("#get-involved")}
+          onClick={() => { ref.current!.style.display = "none"; router.push("/donate"); }}
           className="rounded-lg bg-blue px-4 py-2 text-sm font-semibold text-white"
         >
           Donate

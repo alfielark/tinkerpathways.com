@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { SITE } from "@/lib/content";
 
 export function Hero() {
+  const router = useRouter();
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-32 pb-24 md:px-12">
@@ -25,10 +27,10 @@ export function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href="#how-it-works"
+              href="/projects"
               onClick={(e) => {
                 e.preventDefault();
-                document.querySelector("#how-it-works")?.scrollIntoView({ behavior: "smooth" });
+                router.push("/projects");
               }}
               className="inline-flex items-center gap-2 rounded-xl bg-blue px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-dark hover:shadow-lg hover:shadow-blue/25"
             >
