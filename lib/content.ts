@@ -5,7 +5,7 @@ export const SITE = {
     "We build the tools, curriculum, and community to help young people discover the craft of agentic software engineering — one experiment at a time.",
   url: "https://tinkerpathways.com",
   charityNumber: "Registered Charity No. 1218899",
-  registeredAddress: "71–75 Shelton Street, London, WC2H 9JQ",
+  registeredAddress: "",
 } as const;
 
 export const NAV_ITEMS = [
