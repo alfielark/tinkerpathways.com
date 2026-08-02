@@ -12,18 +12,21 @@ const STAFF = [
     name: "Alfie Lark",
     role: "Executive Director, Chair",
     age: "16",
+    email: "alfie@tinkerpathways.com",
     bio: "Founder of Tinker Pathways. Built the charity from the ground up to give young people the tools to build the future, not just consume it.",
   },
   {
     name: "Jamie Singh",
     role: "Creative Director, Treasurer",
     age: "18",
+    email: "jamie@tinkerpathways.com",
     bio: "Leads design, brand, and financial strategy. Ensures everything we make is as beautiful as it is functional.",
   },
   {
     name: "Will Cave",
     role: "Secretary",
     age: "16",
+    email: "will@tinkerpathways.com",
     bio: "Keeps the charity running smoothly — governance, comms, and making sure nothing falls through the cracks.",
   },
 ] as const;
@@ -86,6 +89,12 @@ export default function GovernancePage() {
                   {person.role}
                 </span>
               </div>
+              <a
+                href={`mailto:${person.email}`}
+                className="mt-2 inline-block text-sm font-medium text-blue transition-colors hover:text-blue-dark"
+              >
+                {person.email}
+              </a>
               <p className="mt-3 text-sm leading-relaxed text-slate">
                 {person.bio}
               </p>

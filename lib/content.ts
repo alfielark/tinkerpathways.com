@@ -4,6 +4,7 @@ export const SITE = {
   description:
     "We build the tools, curriculum, and community to help young people discover the craft of agentic software engineering — one experiment at a time.",
   url: "https://tinkerpathways.com",
+  email: "hello@tinkerpathways.com",
   charityNumber: "Registered Charity No. 1218899",
   registeredAddress: "",
 } as const;
@@ -85,7 +86,7 @@ export const CTA = {
 export const FOOTER_LINKS = [
   { label: "Privacy Policy", href: "#" },
   { label: "Terms of Service", href: "#" },
-  { label: "Contact Us", href: "#" },
+  { label: "Contact Us", href: `mailto:${SITE.email}` },
   { label: "Safeguarding", href: "#" },
 ] as const;
 

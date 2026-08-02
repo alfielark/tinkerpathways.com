@@ -27,7 +27,6 @@ npm run lint       # Run ESLint
 
 Black-and-white aesthetic with a single blue accent (#3B82F6) and a red signal (#DC2626). Tokens defined in `globals.css` via `@theme inline`: `ink`, `ink-light`, `paper`, `paper-dark`, `blue`/`blue-dark`/`blue-light`, `slate`/`slate-light`/`slate-dark`, `signal`.
 
-- `cursor: none` on body and all interactive elements (reverted on touch devices via `@media (pointer: coarse)`)
 - Native scrollbar hidden globally via `scrollbar-width: none` / `-webkit-scrollbar { display: none }`
 - `prefers-reduced-motion: reduce` disables smooth scrolling
 - Lenis CSS rules (`html.lenis`, `.lenis-smooth`, `[data-lenis-prevent]`) for proper scroll behavior interop
@@ -38,7 +37,7 @@ Black-and-white aesthetic with a single blue accent (#3B82F6) and a red signal (
 A Server Component. Loads three Google Fonts as CSS variables, wraps children in `<Providers>`, renders fixed edge-blur vignette divs (hidden below `2xl` breakpoint, 12px backdrop-filter with linear-gradient mask). Uses metadata title template: `"%s — Tinker Pathways"`.
 
 ### Providers (`components/Providers.tsx`)
-The single client boundary. Wraps children in `ReactLenis` (keyed on `pathname` so Lenis re-initialises on page navigation and picks up new scroll height). Inside Lenis: a `relative z-10` div containing `<WarpGrid />` (z-index 0) + children. Outside Lenis: `<MouseFollower />` (position fixed, z-index 99999).
+The single client boundary. Wraps children in `ReactLenis` (keyed on `pathname` so Lenis re-initialises on page navigation and picks up new scroll height). Inside Lenis: a `relative z-10` div containing `<GridBackground />` (z-index 0) + children.
 
 ### Home page (`app/page.tsx`)
 Imports and composes section components in order — no data fetching:
@@ -56,7 +55,7 @@ Explicit sitemap listing all 5 routes (home, projects, governance, our-story, do
 ## Components
 
 ### Section components (home page)
-All are `"use client"`. They have **no backgrounds, no borders, no dividers** — the page reads as a single scrollable surface with only the WarpGrid behind it. Each is a `<section>` with `section-padding` utility and an optional `id` for nav scrolling.
+All are `"use client"`. They have **no backgrounds, no borders, no dividers** — the page reads as a single scrollable surface with only the static grid behind it. Each is a `<section>` with `section-padding` utility and an optional `id` for nav scrolling.
 
 - **Hero** — Full-viewport heading/tagline with entrance animation, CTA buttons (uses `useRouter` for navigation)
 - **StatsBar** — 4 counter items with scroll-triggered count-up via `requestAnimationFrame` (not Framer Motion values — renders an `AnimatedNumber` sub-component inside the same file)
@@ -66,9 +65,8 @@ All are `"use client"`. They have **no backgrounds, no borders, no dividers** �
 - **CTASection** — Donate/Volunteer CTA block with staggered entrance animations
 - **Footer** — Charity details, legal links, social links, copyright (uses `new Date().getFullYear()`)
 
-### Visual effects (not tested)
-- **WarpGrid** — Canvas filling full document height (`absolute inset-0`). Draws 48px-spaced gray grid lines at 8% opacity, 1px stroke. Lines near cursor warp outward (260px radius, quadratic falloff, 24px max displacement) and turn blue. Blue intersection dots appear near cursor. Coordinates in document-space (`clientX`, `clientY + scrollY`). Performance: static unwarped grid pre-rendered to offscreen canvas and blitted each frame; only ~520px warp zone around cursor recalculated.
-- **MouseFollower** — Fixed 40px blue circle with 2.5px border, 8% fill, box-shadow glow. Follows via `requestAnimationFrame` with lerp (0.08) for smooth trailing.
+### Background effect (not tested)
+- **GridBackground** — Canvas filling full document height (`absolute inset-0`). Draws a static 48px-spaced gray grid at 8% opacity, 1px stroke. No cursor interaction; redraws on resize or document-height change. (Previously `WarpGrid` with cursor warping — that effect was removed.)
 
 ### Navigation (`components/Navigation.tsx`)
 Fixed-position sticky nav. Parses `NAV_ITEMS` from content and scrolls to section anchors on click (uses `router.push` for /donate). Has a backdrop-blur edge overlay behind it. Includes a mobile menu (`display: none/flex` toggle) with the same links. Has a "Donate" CTA button.
@@ -87,6 +85,5 @@ Fixed-position sticky nav. Parses `NAV_ITEMS` from content and scrolls to sectio
 ## Testing
 
 - `vitest.setup.tsx` globally mocks: framer-motion (Proxy replaces all `motion.*` with plain HTML elements), Lenis, `next/font/google`, `next/navigation`, `@testing-library/jest-dom/vitest`, `ResizeObserver`
-- Canvas-based effects (WarpGrid) and mouse-tracking (MouseFollower) are **not tested**
 - Tests live alongside their component (e.g. `Hero.test.tsx`)
 - Use `act()` wrappers for async renders

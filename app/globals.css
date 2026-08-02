@@ -53,19 +53,6 @@
 
   body {
     overflow-x: hidden;
-    cursor: none;
-  }
-
-  body * {
-    cursor: none;
-  }
-
-  /* Revert to default cursor on touch devices (no hover state) */
-  @media (pointer: coarse) {
-    body,
-    body * {
-      cursor: auto;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {

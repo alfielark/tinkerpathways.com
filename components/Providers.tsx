@@ -3,8 +3,7 @@
 import { ReactLenis } from "lenis/react";
 import { type ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { WarpGrid } from "./WarpGrid";
-import { MouseFollower } from "./MouseFollower";
+import { GridBackground } from "./GridBackground";
 
 export function Providers({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -26,11 +25,10 @@ export function Providers({ children }: { children: ReactNode }) {
         }}
       >
         <div className="relative z-10">
-          <WarpGrid />
+          <GridBackground />
           {children}
         </div>
       </ReactLenis>
-      <MouseFollower />
     </>
   );
 }
