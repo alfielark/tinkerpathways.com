@@ -73,7 +73,9 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen font-sans antialiased">
+      {/* Opaque body paint doubles as the backdrop for the nav brand's
+          difference blend (transparent canvas would leave it always white). */}
+      <body className="min-h-screen bg-paper font-sans antialiased">
         <JsonLd />
         <Providers>{children}</Providers>
 

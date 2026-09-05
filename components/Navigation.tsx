@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -18,6 +18,46 @@ export function Navigation() {
     setPrevPathname(pathname);
     setOpen(false);
   }
+
+  // The footer CTA card is dark and scrolls under the fixed nav — flip the
+  // brand white once the card reaches the strip just below the wordmark.
+  const brandRef = useRef<HTMLAnchorElement>(null);
+  const [onDark, setOnDark] = useState(false);
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return;
+    const brand = brandRef.current;
+    const target = document.getElementById("get-involved");
+    if (!brand || !target) return;
+    // Lead zone below the wordmark: flip while the card is still
+    // approaching, not only on contact.
+    const LEAD_PX = 80;
+    const setup = () => {
+      // rootMargin only accepts px/%, so resolve the lead zone to pixels:
+      // a strip from the wordmark's bottom edge to LEAD_PX below it.
+      // (Positive margins expand the root outward, so both insets are
+      // negative to shrink the viewport down to that strip.)
+      const bottom = brand.getBoundingClientRect().bottom;
+      const observer = new IntersectionObserver(
+        ([entry]) => setOnDark(entry.isIntersecting),
+        {
+          rootMargin: `${-bottom}px 0px ${bottom + LEAD_PX - window.innerHeight}px 0px`,
+          threshold: 0,
+        }
+      );
+      observer.observe(target);
+      return () => observer.disconnect();
+    };
+    let cleanup = setup();
+    const onResize = () => {
+      cleanup();
+      cleanup = setup();
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      cleanup();
+      window.removeEventListener("resize", onResize);
+    };
+  }, [pathname]);
 
   return (
     <>
@@ -42,7 +82,10 @@ export function Navigation() {
         <div className="content-width flex items-center justify-between py-4">
           <Link
             href="/"
-            className="font-display text-lg font-bold tracking-tight text-ink"
+            ref={brandRef}
+            className={`font-display text-lg font-bold tracking-tight transition-colors ${
+              onDark ? "text-white" : "text-ink"
+            }`}
           >
             {SITE.name}
           </Link>
