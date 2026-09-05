@@ -12,7 +12,12 @@ export function Providers({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className="relative z-10">
+      {/* overflow-clip keeps absolutely-positioned decor (e.g. the
+          full-document-height grid canvas) from extending the page's
+          scrollable overflow, so document height always reflects the
+          current page content. clip (not hidden) avoids creating a
+          scroll container or trapping fixed descendants. */}
+      <div className="relative z-10 overflow-clip">
         <GridBackground />
         <Navigation />
         {/* Keying on pathname destroys the old Lenis instance and creates a
