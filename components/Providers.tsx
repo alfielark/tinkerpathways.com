@@ -31,7 +31,7 @@ export function Providers({ children }: { children: ReactNode }) {
             touchMultiplier: 1.5,
           }}
         >
-          {children}
+          <div className="page-transition">{children}</div>
         </ReactLenis>
         <Footer />
       </div>

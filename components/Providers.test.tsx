@@ -47,6 +47,12 @@ describe("Providers persistent chrome", () => {
     expect(screen.getByText("Volunteer your time")).toBeInTheDocument();
   });
 
+  it("wraps page content in the view-transition group", async () => {
+    await renderChrome();
+    const content = screen.getByText("page content");
+    expect(content.closest(".page-transition")).not.toBeNull();
+  });
+
   it("renders the charity number", async () => {
     await renderChrome();
     expect(

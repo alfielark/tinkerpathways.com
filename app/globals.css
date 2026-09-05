@@ -62,6 +62,14 @@
     .lenis-smooth {
       scroll-behavior: auto;
     }
+    @view-transition {
+      navigation: none;
+    }
+    ::view-transition-group(page-content),
+    ::view-transition-old(page-content),
+    ::view-transition-new(page-content) {
+      animation: none;
+    }
   }
 }
 
@@ -71,4 +79,52 @@
 
 @utility content-width {
   @apply mx-auto w-full max-w-6xl px-6 md:px-12;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+.page-transition {
+  view-transition-name: page-content;
+}
+
+::view-transition-group(page-content) {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-old(page-content) {
+  animation-name: page-content-out;
+}
+
+::view-transition-new(page-content) {
+  animation-name: page-content-in;
+}
+
+@keyframes page-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-content-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Persistent chrome (nav/footer) is identical across pages — skip the
+   default root cross-fade so only the page content visibly transitions. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
 }
