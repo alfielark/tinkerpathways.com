@@ -64,7 +64,13 @@ export function GridBackground() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none"
-      style={{ zIndex: 0 }}
+      style={{
+        zIndex: 0,
+        maskImage:
+          "radial-gradient(ellipse 90% 70% at 50% 30%, black 40%, transparent 100%)",
+        WebkitMaskImage:
+          "radial-gradient(ellipse 90% 70% at 50% 30%, black 40%, transparent 100%)",
+      }}
     />
   );
 }

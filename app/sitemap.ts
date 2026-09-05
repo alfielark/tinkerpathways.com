@@ -1,36 +1,51 @@
 import type { MetadataRoute } from "next";
+import { SITE } from "@/lib/content";
+
+const LAST_MODIFIED = new Date("2026-09-05");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://tinkerpathways.com";
+  const baseUrl = SITE.url;
 
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: LAST_MODIFIED,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${baseUrl}/projects`,
-      lastModified: new Date(),
+      lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/governance`,
-      lastModified: new Date(),
+      url: `${baseUrl}/team`,
+      lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/our-story`,
-      lastModified: new Date(),
+      lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/testimonies`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/waitlist`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
       url: `${baseUrl}/donate`,
-      lastModified: new Date(),
+      lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 0.6,
     },

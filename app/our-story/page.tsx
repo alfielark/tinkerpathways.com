@@ -1,10 +1,13 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Our Story",
+  description:
+    "Founded in 2026 by three teenagers with no experience and a plan. Tinker Pathways was born from a simple belief: the next generation should build the future, not just consume it.",
+  alternates: {
+    canonical: "/our-story",
+  },
 };
 
 const TIMELINE = [
@@ -33,33 +36,12 @@ const TIMELINE = [
 export default function OurStoryPage() {
   return (
     <>
-      <Navigation />
-      <main className="section-padding mx-auto max-w-3xl pt-36">
-        <div className="mb-12">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate transition-colors hover:text-blue"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Back to home
-          </Link>
-        </div>
+      <main className="content-width section-padding pt-36">
+        <Breadcrumbs
+          items={[{ label: "Home", href: "/" }, { label: "Our Story" }]}
+        />
 
         <div className="mb-16">
-          <span className="mb-3 inline-block font-mono text-xs font-medium uppercase tracking-widest text-blue">
-            How we started
-          </span>
           <h1 className="font-display text-4xl font-bold tracking-tight text-ink md:text-5xl">
             Our Story
           </h1>
@@ -88,7 +70,6 @@ export default function OurStoryPage() {
           ))}
         </div>
       </main>
-      <Footer />
     </>
   );
 }

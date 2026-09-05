@@ -1,42 +1,24 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Donate",
+  description:
+    "Every contribution goes directly toward building free tools and resources for students. Tinker Pathways is a registered charity, so your donation is likely eligible for Gift Aid.",
+  alternates: {
+    canonical: "/donate",
+  },
 };
 
 export default function DonatePage() {
   return (
     <>
-      <Navigation />
-      <main className="section-padding mx-auto max-w-3xl pt-36">
-        <div className="mb-12">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate transition-colors hover:text-blue"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Back to home
-          </Link>
-        </div>
+      <main className="content-width section-padding pt-36">
+        <Breadcrumbs
+          items={[{ label: "Home", href: "/" }, { label: "Donate" }]}
+        />
 
         <div className="mb-16">
-          <span className="mb-3 inline-block font-mono text-xs font-medium uppercase tracking-widest text-blue">
-            Support our work
-          </span>
           <h1 className="font-display text-4xl font-bold tracking-tight text-ink md:text-5xl">
             Make a donation
           </h1>
@@ -81,7 +63,6 @@ export default function DonatePage() {
           .
         </p>
       </main>
-      <Footer />
     </>
   );
 }

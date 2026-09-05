@@ -24,18 +24,15 @@ export function AboutSection() {
       ref={ref}
       className="section-padding relative overflow-hidden"
     >
-      <div className="relative mx-auto max-w-6xl">
+      <div className="content-width relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-16 text-center"
         >
-          <span className="mb-3 inline-block font-mono text-xs font-medium uppercase tracking-widest text-blue">
-            About us
-          </span>
           <h2 className="font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-            More than just a charity
+            A registered charity
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-sm text-slate">
             We&apos;re building tools, curriculum, and community to make agentic
@@ -54,8 +51,11 @@ export function AboutSection() {
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 variants={cardVariants}
-                className="group relative rounded-2xl border border-ink/10 bg-paper p-8"
+                className="group relative h-full rounded-2xl border border-ink/10 bg-paper p-8 shadow-card transition-all hover:-translate-y-1 hover:border-blue/40 hover:shadow-card-hover"
               >
+                <span className="mb-4 block font-mono text-xs font-semibold tracking-widest text-blue/70">
+                  0{i + 1}
+                </span>
                 <h3 className="font-display text-2xl font-bold text-ink">
                   {card.title}
                 </h3>

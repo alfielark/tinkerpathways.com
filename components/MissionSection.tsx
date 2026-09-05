@@ -14,12 +14,13 @@ export function MissionSection() {
       ref={ref}
       className="section-padding"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="content-width text-center">
+        <div className="mx-auto max-w-3xl">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="font-display text-center text-3xl leading-tight font-bold tracking-tight text-ink md:text-4xl md:leading-tight"
+          className="font-display text-3xl leading-tight font-bold tracking-tight text-balance text-ink md:text-5xl md:leading-[1.1]"
         >
           {MISSION.heading}
         </motion.h2>
@@ -40,6 +41,7 @@ export function MissionSection() {
           ))}
         </motion.div>
 
+        </div>
       </div>
     </section>
   );

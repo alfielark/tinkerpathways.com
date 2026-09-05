@@ -101,8 +101,13 @@ export function HowItWorks() {
     const dy12 = (p2.y - p1.y) / 3;
     const dy23 = (p3.y - p2.y) / 3;
 
+    const containerH = containerRect.height;
+
+    // Vertical lead-in from the container top and tail to the container
+    // bottom. Both joints meet the S-curves with a vertical tangent, so the
+    // joins are smooth; the mask hides the joints behind the end squares.
     setPathD(
-      `M ${p1.x},${p1.y} C ${p1.x},${p1.y + dy12} ${p2.x},${p2.y - dy12} ${p2.x},${p2.y} C ${p2.x},${p2.y + dy23} ${p3.x},${p3.y - dy23} ${p3.x},${p3.y}`,
+      `M ${p1.x},0 L ${p1.x},${p1.y} C ${p1.x},${p1.y + dy12} ${p2.x},${p2.y - dy12} ${p2.x},${p2.y} C ${p2.x},${p2.y + dy23} ${p3.x},${p3.y - dy23} ${p3.x},${p3.y} L ${p3.x},${containerH}`,
     );
 
     // Store square centers for the mask (black circles hide the path behind squares)
@@ -148,7 +153,7 @@ export function HowItWorks() {
       ref={sectionRef}
       className="section-padding relative overflow-hidden"
     >
-      <div className="relative mx-auto max-w-6xl">
+      <div className="content-width relative">
         {/* Heading */}
         <motion.div
           ref={headingRef}
@@ -157,9 +162,6 @@ export function HowItWorks() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-32 text-center"
         >
-          <span className="mb-3 inline-block font-mono text-xs font-medium uppercase tracking-widest text-blue">
-            How it works
-          </span>
           <h2 className="font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
             From first idea to first launch
           </h2>
@@ -186,6 +188,19 @@ export function HowItWorks() {
               </linearGradient>
             </defs>
 
+            {/* Soft glow underlay for the drawn line. Shares the draw
+                progress and tip fade so it dissolves with the main line. */}
+            <motion.path
+              d={pathD}
+              fill="none"
+              stroke="url(#fade-tip)"
+              strokeWidth="10"
+              strokeLinecap="round"
+              opacity="0.12"
+              mask="url(#path-mask)"
+              style={{ pathLength: pathProgress }}
+            />
+
             {/* Single path with gradient — pathLength clips at the draw head,
                 and the gradient fades the last ~15% before the draw head to
                 transparent, so the end of the line always dissolves. */}
@@ -200,14 +215,16 @@ export function HowItWorks() {
             />
           </svg>
 
-          {/* Steps */}
+          {/* Steps — on mobile these are plain divided entries (no cards,
+              no number squares); card + square styling applies from md up */}
+          <div>
           {STEPS.map((step, index) => {
             const isLeft = index % 2 === 0;
             return (
               <motion.div
                 key={step.number}
                 ref={stepRefs[index]}
-                className={`relative z-10 mb-16 flex flex-col items-center gap-8 last:mb-0 md:mb-96 md:flex-row md:gap-32 ${
+                className={`relative z-10 flex flex-col border-t border-ink/10 py-8 first:border-t-0 first:pt-0 last:pb-0 md:mb-96 md:flex-row md:items-center md:gap-32 md:border-t-0 md:py-0 ${
                   isLeft ? "" : "md:flex-row-reverse"
                 }`}
                 style={
@@ -216,14 +233,30 @@ export function HowItWorks() {
                     : undefined
                 }
               >
-                {/* Numbered square */}
-                <div className="number-square flex size-20 flex-shrink-0 items-center justify-center rounded-2xl border-2 border-blue bg-blue/[0.06] font-mono text-2xl font-bold text-blue">
-                  {step.number}
+                {/* Numbered square with a halo ring that lights up as the
+                    scroll draw reaches the step. The ring reuses the step's
+                    existing reveal opacity; step 1 is always lit. */}
+                <div className="relative hidden flex-shrink-0 md:block">
+                  {stepOpacities[index] ? (
+                    <motion.span
+                      aria-hidden="true"
+                      className="absolute -inset-2 rounded-[1.5rem] border-2 border-blue/30"
+                      style={{ opacity: stepOpacities[index] }}
+                    />
+                  ) : (
+                    <span
+                      aria-hidden="true"
+                      className="absolute -inset-2 rounded-[1.5rem] border-2 border-blue/30"
+                    />
+                  )}
+                  <div className="number-square flex size-20 items-center justify-center rounded-2xl border-2 border-blue bg-blue/[0.06] font-mono text-2xl font-bold text-blue">
+                    {step.number}
+                  </div>
                 </div>
 
                 {/* Content */}
                 <div
-                  className={`max-w-sm flex-1 ${isLeft ? "md:text-left" : "md:text-right"}`}
+                  className={`flex-1 md:max-w-sm md:rounded-2xl md:border md:border-ink/10 md:bg-paper md:p-8 md:shadow-card ${isLeft ? "md:text-left" : "md:text-right"}`}
                 >
                   <h3 className="font-display text-xl font-bold tracking-tight text-ink md:text-2xl">
                     {step.title}
@@ -235,6 +268,7 @@ export function HowItWorks() {
               </motion.div>
             );
           })}
+          </div>
         </div>
       </div>
     </section>

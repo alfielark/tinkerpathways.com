@@ -10,10 +10,11 @@ export const SITE = {
 } as const;
 
 export const NAV_ITEMS = [
-  { label: "Our Mission", href: "#mission" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "About Us", href: "#about" },
-  { label: "Get Involved", href: "#get-involved" },
+  { label: "Projects", href: "/projects" },
+  { label: "Team", href: "/team" },
+  { label: "Our Story", href: "/our-story" },
+  { label: "Testimonies", href: "/testimonies" },
+  { label: "Waitlist", href: "/waitlist" },
 ] as const;
 
 export const STATS = [
@@ -61,11 +62,11 @@ export const ABOUT_CARDS = [
     href: "/projects",
   },
   {
-    title: "Governance",
+    title: "Trustees & Team",
     description:
       "Built for students, by students — our team of young leaders runs the charity day-to-day, from product to finance to governance. Meet the team.",
     action: "Meet the team",
-    href: "/governance",
+    href: "/team",
   },
   {
     title: "Our Story",
@@ -83,15 +84,76 @@ export const CTA = {
   volunteerLabel: "Volunteer your time",
 } as const;
 
-export const FOOTER_LINKS = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
-  { label: "Contact Us", href: `mailto:${SITE.email}` },
-  { label: "Safeguarding", href: "#" },
+export const FOOTER_COLUMNS = [
+  {
+    heading: "Explore",
+    links: [
+      { label: "Projects", href: "/projects" },
+      { label: "Trustees & Team", href: "/team" },
+      { label: "Our Story", href: "/our-story" },
+      { label: "Testimonies", href: "/testimonies" },
+    ],
+  },
+  {
+    heading: "Support",
+    links: [
+      { label: "Donate", href: "/donate" },
+      { label: "Join the waitlist", href: "/waitlist" },
+      { label: "Contact Us", href: `mailto:${SITE.email}` },
+    ],
+  },
 ] as const;
 
-export const SOCIAL_LINKS = [
-  { label: "GitHub", href: "#" },
-  { label: "X (Twitter)", href: "#" },
-  { label: "LinkedIn", href: "#" },
-] as const;
+export const WAITLIST_COPY = {
+  kicker: "Coming soon",
+  title: "Waitlist",
+  heading: "Be first in line",
+  lede: "We're working on an AI block-coding education tool. Join the waitlist and we'll be in touch when there's news to share.",
+  nameLabel: "Your name",
+  namePlaceholder: "Ada Lovelace",
+  emailLabel: "Email address",
+  emailPlaceholder: "you@example.com",
+  roleLabel: "I am a…",
+  roles: ["Student", "Teacher", "Parent", "Other"],
+  submitLabel: "Join the waitlist",
+  successHeading: "You're on the list",
+  successBody:
+    "Thanks for your interest. We'll be in touch at the email you gave us when there's news to share.",
+  contactFallback: "Prefer email? Get in touch directly and we'll add you manually.",
+} as const;
+
+export const TESTIMONIES_COPY = {
+  kicker: "Testimonies",
+  title: "Testimonies",
+  heading: "What our community says",
+  lede: "What students, teachers, and parents say about learning with Tinker Pathways.",
+  disclaimer:
+    "The quotes below are illustrative placeholders — real testimonies coming soon.",
+  placeholderBadge: "Illustrative placeholder",
+  quotes: [
+    {
+      role: "Student",
+      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      role: "Teacher",
+      body: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat, etc.",
+    },
+    {
+      role: "Parent",
+      body: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, etc.",
+    },
+    {
+      role: "Student",
+      body: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum, etc.",
+    },
+    {
+      role: "Teacher",
+      body: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, etc.",
+    },
+    {
+      role: "Parent",
+      body: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur, etc.",
+    },
+  ],
+} as const;

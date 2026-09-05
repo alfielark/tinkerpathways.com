@@ -10,11 +10,6 @@ describe("HowItWorks", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the section label", () => {
-    render(<HowItWorks />);
-    expect(screen.getByText("How it works")).toBeInTheDocument();
-  });
-
   it("renders all three step numbers", () => {
     render(<HowItWorks />);
     expect(screen.getByText("01")).toBeInTheDocument();
@@ -49,5 +44,18 @@ describe("HowItWorks", () => {
     const svg = document.querySelector("svg");
     expect(svg).toBeInTheDocument();
     expect(svg).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("renders the main path plus its glow underlay", () => {
+    render(<HowItWorks />);
+    expect(document.querySelectorAll("svg path")).toHaveLength(2);
+  });
+
+  it("renders one halo ring per step without disturbing measurement", () => {
+    render(<HowItWorks />);
+    expect(
+      document.querySelectorAll('span[class*="border-blue"]'),
+    ).toHaveLength(3);
+    expect(document.querySelectorAll("[class*='size-20']")).toHaveLength(3);
   });
 });
