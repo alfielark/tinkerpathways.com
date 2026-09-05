@@ -22,6 +22,9 @@
   --color-slate-light: #9CA3AF;
   --color-slate-dark: #374151;
   --color-signal: #DC2626;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -12px rgb(0 0 0 / 0.12);
+  --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.05), 0 16px 40px -16px rgb(59 130 246 / 0.28);
 }
 
 @layer base {
@@ -41,21 +44,18 @@
     overscroll-behavior: contain;
   }
 
+  /* Hide the native scrollbar so it never shifts content.
+     Scrolling still works via Lenis, wheel, and keyboard. */
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
     overflow-x: hidden;
-    cursor: none;
-  }
-
-  body * {
-    cursor: none;
-  }
-
-  /* Revert to default cursor on touch devices (no hover state) */
-  @media (pointer: coarse) {
-    body,
-    body * {
-      cursor: auto;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -66,5 +66,9 @@
 }
 
 @utility section-padding {
-  @apply px-6 py-24 md:px-12 md:py-32;
+  @apply py-24 md:py-32;
+}
+
+@utility content-width {
+  @apply mx-auto w-full max-w-6xl px-6 md:px-12;
 }

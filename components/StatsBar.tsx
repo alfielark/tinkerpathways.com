@@ -25,7 +25,7 @@ function Counter({
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="font-display block text-4xl font-bold tracking-tight text-blue md:text-5xl"
+        className="font-display block text-4xl font-bold tracking-tight text-blue tabular-nums md:text-5xl"
       >
         {isInView ? (
           <AnimatedNumber target={value} decimals={decimals} />
@@ -38,7 +38,7 @@ function Counter({
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-        className="mt-1 block text-sm text-slate"
+        className="mt-2 block font-mono text-[11px] font-medium tracking-wider text-slate uppercase"
       >
         {label}
       </motion.span>
@@ -91,9 +91,9 @@ export function StatsBar() {
   return (
     <section
       ref={ref}
-      className="relative px-6 py-16 md:py-20"
+      className="relative border-y border-ink/10 bg-paper/60 py-16 backdrop-blur-sm md:py-20"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="content-width">
         <div className="grid grid-cols-2 gap-12 md:grid-cols-4 md:gap-8">
           {STATS.map((stat, i) => (
             <div
